@@ -14,10 +14,10 @@ const Navbar = () => {
         <Link href="/pools" className="hover:underline">
           <span>Pools</span>
         </Link>
-        <Link href="/about-us" className="hover:underline">
+        <Link href="/about" className="hover:underline">
           <span>About Us</span>
         </Link>
-        <Link href="/about-us" className="hover:underline">
+        <Link href="/network" className="hover:underline">
           <span>Our Networks</span>
         </Link>
         <Link href="/about-us" className="hover:underline">
