@@ -3,9 +3,9 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="">
-      <div className="flex flex-row items-center container  justify-between">
-        <div className="pl-10 flex">
+    <footer className="rounded shadow-lg">
+      <div className="flex flex-row items-center container  justify-between pl-4">
+        <div className="pl-10 flex flex-col gap-4">
           <Link href="/">
             <Image
               src="/logo.png"
@@ -13,9 +13,10 @@ const Footer = () => {
               width={80}
               height={20}
               loading="lazy"
+              className="rounded-lg"
             />
           </Link>
-          <div>
+          <div className="container text-sm">
             Join the next evolution of the internet—where trust, transparency,
             and ownership belong to you. Build, trade, and connect in a
             borderless digital world.

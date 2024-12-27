@@ -6,7 +6,7 @@ export default function Home() {
       <Hero />
       <div className="my-5">
         <div className="grid grid-cols-1 md:grid-cols-3 mx-5 gap-6 mb-8">
-          <div className="flex flex-col items-center p-6 bg-gray-800 rounded-lg shadow-lg">
+          <div className="flex flex-col items-center p-6 rounded-lg shadow-lg">
             <h2 className="text-3xl font-semibold mb-4">Fair & Transparent</h2>
             <p className="text-lg">
               With blockchain&apos;s immutable ledger, all bets and transactions
@@ -15,7 +15,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-col items-center p-6 bg-gray-800 rounded-lg shadow-lg">
+          <div className="flex flex-col items-center p-6 rounded-lg shadow-lg">
             <h2 className="text-3xl font-semibold mb-4">
               Decentralized & Secure
             </h2>
@@ -26,7 +26,7 @@ export default function Home() {
               transparent environment for betting.
             </p>
           </div>
-          <div className="flex flex-col items-center p-6 bg-gray-800 rounded-lg shadow-lg">
+          <div className="flex flex-col items-center p-6  rounded-lg shadow-lg">
             <h2 className="text-3xl font-semibold mb-4">
               Decentralized & Secure
             </h2>

@@ -1,7 +1,7 @@
 const Pools = () => {
   return (
     <>
-      <div className=" flex flex-col items-center justify-between">
+      <div className=" min-h-[100vh] flex flex-col items-center gap-5">
         <h1 className="text-4xl font-bold pb-9">Welcome to the Pools!</h1>
         <form className="flex flex-col">
           <input type="number" name="amount" placeholder="Enter your bet amount" />
