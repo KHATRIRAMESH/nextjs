@@ -4,7 +4,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer className="rounded shadow-lg mt-36 mb-8 mx-16">
-      <div className="grid grid-cols-4 gap-16 items-center container  justify-between pl-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 items-center container  justify-between pl-4">
         <div className="pl-10 flex flex-col gap-4">
           <Link href="/">
             <Image
@@ -45,7 +45,8 @@ const Footer = () => {
       <div className="flex flex-wrap items-center mt-5 justify-center gap-4 text-center px-4 md:px-8">
         <div className="flex items-center gap-1 text-sm md:text-base">
           <span>&copy;{new Date().getFullYear()} Builder Academy</span>
-          <span>| All rights reserved</span>
+          <span>|</span>
+          <span> All rights reserved</span>
         </div>
       </div>
     </footer>

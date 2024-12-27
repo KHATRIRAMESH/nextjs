@@ -1,11 +1,13 @@
 import { Facebook, Send } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import HamburgerMenu from "./HamburgerMenu";
 
 const Navbar = () => {
+
   return (
-    <nav className=" w-full z-50 flex items-center justify-between px-6 py-4 mt-10">
-      <div className="pl-20 ">
+    <nav className=" w-full z-50 flex items-center justify-between px-6 py-4 mt-10 ">
+      <div className="sm:pl-20 pl-10">
         <Link href="/">
           <Image
             src="/logo.png"
@@ -16,7 +18,7 @@ const Navbar = () => {
           />
         </Link>
       </div>
-      <div className="flex gap-10">
+      <div className="hidden sm:flex gap-10">
         <div className="flex justify-between items-center  font-bold text-lg gap-10">
           <Link href="/pools" className="hover:underline">
             <span>Pools</span>
@@ -44,6 +46,7 @@ const Navbar = () => {
           </Link>
         </div>
       </div>
+      <HamburgerMenu/>
     </nav>
   );
 };
