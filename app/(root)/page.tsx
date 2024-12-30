@@ -1,9 +1,9 @@
-import Hero from "../../components/Hero";
+import Hero from "../../components/hero/Hero";
 
 export default function Home() {
   return (
     <div>
-      <Hero />
+      <Hero/>
       <div className="my-5">
         <div className="grid grid-cols-1 md:grid-cols-3 mx-5 gap-6 mb-8">
           <div className="flex flex-col items-center p-6 rounded-lg shadow-lg">

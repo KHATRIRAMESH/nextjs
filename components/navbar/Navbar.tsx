@@ -15,6 +15,7 @@ const Navbar = () => {
             width={80}
             height={20}
             className="rounded-lg"
+            loading="lazy"
           />
         </Link>
       </div>
