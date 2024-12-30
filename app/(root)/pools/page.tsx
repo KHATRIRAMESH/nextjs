@@ -1,9 +1,9 @@
 "use client";
-
+import BarChart from "@/components/Chart/BarChart";
 import { useState } from "react";
 
 const Pools = () => {
-  const [betAmount, setBetAmount] = useState<number | undefined>();
+  const [betAmount, setBetAmount] = useState<number>();
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target?.value;
@@ -16,6 +16,8 @@ const Pools = () => {
   const sendZero = () => {
     alert("You must enter a bet amount.");
   };
+
+
   return (
     <>
       <div className=" min-h-[100vh] flex flex-col items-center gap-5 ">
@@ -46,6 +48,7 @@ const Pools = () => {
             </div>
           </div>
         </form>
+        <BarChart />
       </div>
     </>
   );
