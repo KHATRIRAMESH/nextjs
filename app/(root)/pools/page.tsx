@@ -1,4 +1,7 @@
 "use client";
+import {useState, useEffect} from "react";
+import {ethers, providers} from "ethers";
+import {getContract} from "@/utils/contract";
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target?.value;
@@ -10,6 +13,9 @@
   
 
   const fetchValue = async () => {
+
+
+    const [loading,setLoading]=useState(false);
     try {
       setLoading(true);
       const contract = await getContract();
