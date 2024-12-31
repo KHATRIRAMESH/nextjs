@@ -26,10 +26,13 @@ const [loading,setLoading]=useState(false);
     try {
       setLoading(true);
       const contract = await getContract();
+      console.log("contract",contract)
       const result = await contract.getValue();
-      console.log("Contract stake: ",result);
+      console.log("Contract stake: ", result);
+      console.log("testing")
       console.log(typeof result);
       const valueInEth = ethers.utils.formatEther(result.toString());
+      console.log(valueInEth)
       
       
       setValue(valueInEth);
