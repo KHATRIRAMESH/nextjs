@@ -1,7 +1,8 @@
 "use client";
 import {useState, useEffect} from "react";
-import {ethers, providers} from "ethers";
-import {getContract} from "@/utils/contract";
+import {ethers} from "ethers";
+import { getContract } from "@/utils/contract";
+import CandleChart from "@/components/Chart/CandleChart"
 
 
 const Pools=()=>{
@@ -102,7 +103,7 @@ const [loading,setLoading]=useState(false);
           </div>
         </form>
         {/* <BarChart /> */}
-        <CandleChart />
+        < CandleChart/>
       </div>
     </>
   );
