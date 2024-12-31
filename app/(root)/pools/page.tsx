@@ -3,6 +3,12 @@ import {useState, useEffect} from "react";
 import {ethers, providers} from "ethers";
 import {getContract} from "@/utils/contract";
 
+
+const Pools=()=>{
+const [loading,setLoading]=useState(false);
+  const [betAmount,setBetAmount]=useState<number|undefined>();
+  const [value,setValue]=useState<string|undefined>();
+  
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target?.value;
     if (value !== undefined) {
@@ -15,7 +21,7 @@ import {getContract} from "@/utils/contract";
   const fetchValue = async () => {
 
 
-    const [loading,setLoading]=useState(false);
+    
     try {
       setLoading(true);
       const contract = await getContract();
