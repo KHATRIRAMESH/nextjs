@@ -26,18 +26,18 @@ const [loading,setLoading]=useState(false);
     try {
       setLoading(true);
       const contract = await getContract();
-      console.log("contract",contract)
+      // console.log("contract",contract)
       const result = await contract.getValue();
-      console.log("Contract stake: ", result);
-      console.log("testing")
+      // console.log("Contract stake: ", result);
+      // console.log("testing")
       console.log(typeof result);
       const valueInEth = ethers.utils.formatEther(result.toString());
-      console.log(valueInEth)
+      // console.log(valueInEth)
       
       
       setValue(valueInEth);
 
-      console.log("Value: ", value)
+      // console.log("Value: ", value)
     } catch (err) {
       // setError(err instanceof Error ? err.message : 'An error occurred');
       console.log('Error:', err)
