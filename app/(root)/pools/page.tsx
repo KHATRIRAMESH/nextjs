@@ -1,5 +1,6 @@
 "use client";
-import BarChart from "@/components/Chart/BarChart";
+// import BarChart from "@/components/Chart/BarChart";
+import CandleChart from "@/components/Chart/CandleChart";
 import { useState } from "react";
 
 const Pools = () => {
@@ -10,7 +11,6 @@ const Pools = () => {
     if (value !== undefined) {
       setBetAmount(value ? Number(value) : undefined);
     }
-    // console.log(betAmount);
   };
 
   const sendZero = () => {
@@ -20,7 +20,7 @@ const Pools = () => {
 
   return (
     <>
-      <div className=" min-h-[100vh] flex flex-col items-center gap-5 ">
+      <div className=" min-h-[100vh]  min-w-[100vh] flex flex-col items-center gap-5 ">
         <h1 className="text-4xl font-bold pb-9">Welcome to the Pools!</h1>
         <form className="flex flex-col ">
           <div className="grid grid-cols-1 items-center justify-between  p-5">
@@ -37,18 +37,19 @@ const Pools = () => {
                 className=" rounded shadow-lg bg-[#1f1b24]  mt-2 px-4 py-1 mx-16"
                 onClick={sendZero}
               >
-                -
+                Down
               </button>
               <button className="rounded shadow-lg bg-[#1f1b24]  mt-2 px-4 py-1 mx-16">
                 Bet
               </button>
               <button className=" rounded shadow-lg bg-[#1f1b24]  mt-2 px-4 py-1 mx-16">
-                +
+                Up
               </button>
             </div>
           </div>
         </form>
-        <BarChart />
+        {/* <BarChart /> */}
+        <CandleChart />
       </div>
     </>
   );
