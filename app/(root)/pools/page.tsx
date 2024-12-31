@@ -1,10 +1,4 @@
 "use client";
-// import BarChart from "@/components/Chart/BarChart";
-import CandleChart from "@/components/Chart/CandleChart";
-import { useState } from "react";
-
-const Pools = () => {
-  const [betAmount, setBetAmount] = useState<number>();
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target?.value;
@@ -12,6 +6,42 @@ const Pools = () => {
       setBetAmount(value ? Number(value) : undefined);
     }
   };
+
+  
+
+  const fetchValue = async () => {
+    try {
+      setLoading(true);
+      const contract = await getContract();
+      const result = await contract.getValue();
+      console.log("Contract stake: ",result);
+      console.log(typeof result);
+      const valueInEth = ethers.utils.formatEther(result.toString());
+      
+      
+      setValue(valueInEth);
+
+      console.log("Value: ", value)
+    } catch (err) {
+      // setError(err instanceof Error ? err.message : 'An error occurred');
+      console.log('Error:', err)
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+
+  
+  
+
+  useEffect(() => {
+    // console.log("Updated value:", value);
+    
+    fetchValue();
+  }, []);
+
+  
+
 
   const sendZero = () => {
     alert("You must enter a bet amount.");
@@ -45,6 +75,17 @@ const Pools = () => {
               <button className=" rounded shadow-lg bg-[#1f1b24]  mt-2 px-4 py-1 mx-16">
                 Up
               </button>
+            </div>
+            <div className="text-xl font-bold">
+              Your current balance: {
+                loading ? (
+                  "Loading..."
+                ) : value ? (
+                  `${value} ETH`
+                ) : (
+                  "Please connect your wallet"
+                )
+              }
             </div>
           </div>
         </form>
