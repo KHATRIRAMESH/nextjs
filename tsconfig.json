@@ -39,11 +39,7 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-<<<<<<< HEAD
-    "**/*.tsx"
-=======
     "**/*.tsx",
     "types/**/*.d.ts"
->>>>>>> main
   ]
 }
