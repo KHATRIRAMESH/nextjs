@@ -146,7 +146,7 @@ const Component = () => {
           Real-time BTC Price Updates <TrendingUp className="h-4 w-4" />
         </div>
         <div className="leading-none text-muted-foreground">
-          Displaying the last 10 price updates
+          Displaying the last 5 price updates
         </div>
       </CardFooter>
     </Card>
