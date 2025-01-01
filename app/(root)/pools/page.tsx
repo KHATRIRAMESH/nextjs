@@ -1,4 +1,5 @@
 "use client";
+<<<<<<< HEAD
 
 import { useEffect, useState } from "react";
 import { ethers} from "ethers";
@@ -16,6 +17,12 @@ const Pools = () => {
   const [time, setTime] = useState<number | undefined>();
   const [loading, setLoading] = useState(false);
   // const [isloading, setIsLoading] = useState(false);
+=======
+import {useState, useEffect} from "react";
+import {ethers} from "ethers";
+import { getContract } from "@/utils/contract";
+import CandleChart from "@/components/Chart/CandleChart"
+>>>>>>> main
 
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,17 +41,25 @@ const Pools = () => {
     try {
       setLoading(true);
       const contract = await getContract();
+<<<<<<< HEAD
       console.log(contract);
       const result = await contract.getValue();
 
       console.log("Contract stake: ",result);
+=======
+      // console.log("contract",contract)
+      const result = await contract.getValue();
+      // console.log("Contract stake: ", result);
+      // console.log("testing")
+>>>>>>> main
       console.log(typeof result);
       const valueInEth = ethers.utils.formatEther(result.toString());
+      // console.log(valueInEth)
       
       
       setValue(valueInEth);
 
-      console.log("Value: ", value)
+      // console.log("Value: ", value)
     } catch (err) {
       console.log('Error:', err)
     } finally {
@@ -187,7 +202,7 @@ const Pools = () => {
           </div>
         </form>
         {/* <BarChart /> */}
-        <CandleChart />
+        < CandleChart/>
       </div>
     </>
   );
