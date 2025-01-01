@@ -1,15 +1,22 @@
 "use client";
-import {useState, useEffect} from "react";
-import {ethers} from "ethers";
+import { useState, useEffect } from "react";
+import { ethers } from "ethers";
 import { getContract } from "@/utils/contract";
-import CandleChart from "@/components/Chart/CandleChart"
+import CandleChart from "@/components/Chart/CandleChart";
 
+const Pools = () => {
+  const [loading, setLoading] = useState(false);
+  const [betAmount, setBetAmount] = useState<number | undefined>(0);
+  const [value, setValue] = useState<string | undefined>();
+  const [prediction, setPrediction] = useState<number >(0);
 
-const Pools=()=>{
-const [loading,setLoading]=useState(false);
-  const [betAmount,setBetAmount]=useState<number|undefined>();
-  const [value,setValue]=useState<string|undefined>();
-  
+  const [betDetail, setBetDetail] = useState<{
+    betAmount: number;
+    betTime: string;
+    betPrediction: number;
+  }>({ betAmount: 0, betTime: "", betPrediction: 0 });
+
+  //handle input bet amout change
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target?.value;
     if (value !== undefined) {
@@ -17,52 +24,85 @@ const [loading,setLoading]=useState(false);
     }
   };
 
-  
-
+  //fetch value from user account in metamask
   const fetchValue = async () => {
-
-
-    
     try {
       setLoading(true);
       const contract = await getContract();
-      // console.log("contract",contract)
       const result = await contract.getValue();
-      // console.log("Contract stake: ", result);
-      // console.log("testing")
+
       console.log(typeof result);
       const valueInEth = ethers.utils.formatEther(result.toString());
-      // console.log(valueInEth)
-      
-      
-      setValue(valueInEth);
 
-      // console.log("Value: ", value)
+      setValue(valueInEth);
     } catch (err) {
-      // setError(err instanceof Error ? err.message : 'An error occurred');
-      console.log('Error:', err)
+      console.log("Error:", err);
     } finally {
       setLoading(false);
     }
   };
-  
 
-  
-  
-
+  //fetch prediction from user input
   useEffect(() => {
-    // console.log("Updated value:", value);
-    
     fetchValue();
   }, []);
 
-  
-
-
-  const sendZero = () => {
+  //alert user to enter bet amount
+  const sendZero = (e: React.MouseEvent) => {
+    e.preventDefault();
     alert("You must enter a bet amount.");
+    return;
   };
 
+  //function for submitting bet amount, prediction & timestamp
+  const submitPrediction = async (
+    betAmount: number,
+    betTime: string,
+    betPrediction: number
+  ) => {
+    setBetDetail({ betAmount, betTime, betPrediction });
+    // try {
+    //   setLoading(true);
+    //   const contract = await getContract();
+    //   await contract.setValue(betAmount);
+    //   console.log("Bet submitted successfully!");
+    // } catch (err) {
+    //   // setError(err instanceof Error? err.message : 'An error occurred');
+    //   console.log("Error:", err);
+    // } finally {
+    //   setLoading(false);
+    // }
+
+    // fetchValue();
+
+    // alert("value sumbitted");
+    console.log(betDetail)
+  };
+
+  //handle up
+  const handleUpClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+
+    if (!betAmount) {
+      sendZero(e);
+      return;
+    }
+    setPrediction(0);
+    const betTime = new Date().toLocaleTimeString();
+
+    submitPrediction(betAmount, betTime, prediction);
+  };
+
+  const handleDownClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!betAmount) {
+      sendZero(e);
+      return;
+    }
+    setPrediction(1);
+    const betTime = new Date().toLocaleTimeString();
+    submitPrediction(betAmount, betTime, prediction);
+  };
 
   return (
     <>
@@ -80,33 +120,32 @@ const [loading,setLoading]=useState(false);
             />
             <div className=" flex items-center justify-between">
               <button
-                className=" rounded shadow-lg bg-[#1f1b24]  mt-2 px-4 py-1 mx-16"
-                onClick={sendZero}
+                className="rounded shadow-lg bg-[#1f1b24]  mt-2 px-4 py-1 mx-16"
+                onClick={handleDownClick}
               >
-                Down
+                Bet Down
               </button>
-              <button className="rounded shadow-lg bg-[#1f1b24]  mt-2 px-4 py-1 mx-16">
-                Bet
-              </button>
-              <button className=" rounded shadow-lg bg-[#1f1b24]  mt-2 px-4 py-1 mx-16">
-                Up
+
+              <button
+                className=" rounded shadow-lg bg-[#1f1b24]  mt-2 px-4 py-1 mx-16"
+                onClick={handleUpClick}
+              >
+                Bet Up
               </button>
             </div>
+            {/* <p>{`prediction Details:${betDetail}` }</p> */}
             <div className="text-xl font-bold">
-              Your current balance: {
-                loading ? (
-                  "Loading..."
-                ) : value ? (
-                  `${value} ETH`
-                ) : (
-                  "Please connect your wallet"
-                )
-              }
+              Your current balance:
+              {loading
+                ? "Loading..."
+                : value
+                ? `${value} ETH`
+                : "Please connect your wallet"}
             </div>
           </div>
         </form>
         {/* <BarChart /> */}
-        < CandleChart/>
+        <CandleChart />
       </div>
     </>
   );
