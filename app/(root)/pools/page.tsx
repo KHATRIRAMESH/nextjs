@@ -1,33 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ethers, providers } from "ethers";
-import { getContract } from "@/utils/contract";
-
-
-
-
-
+import { ethers} from "ethers";
+import { getContract, getData, betting } from "@/utils/contract";
+import { Numans } from "next/font/google";
 
 
 
 
 const Pools = () => {
-  const [betAmount, setBetAmount] = useState<number | undefined>();
+  const [betAmount, setBetAmount] = useState<string>('');
   const [value, setValue] = useState<string | undefined>();
-  // const [value, setValue] = useState<string | undefined>();
-  // const [balance, setBalance] = useState<number | undefined>();
-  // const [owner, setOwner] = useState< string| undefined>();
-  //dsafksdhf
-  // const [isConnected, setIsConnected] = useState<boolean>(false);
+  const [amount, setAmount] = useState<number | undefined>();
+  const [time, setTime] = useState<number | undefined>();
   const [loading, setLoading] = useState(false);
+  // const [isloading, setIsLoading] = useState(false);
+
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target?.value;
     if (value !== undefined) {
-      setBetAmount(value ? Number(value) : undefined);
+      setBetAmount(value);
     }
-    // console.log(betAmount);
   };
 
   
@@ -36,7 +30,9 @@ const Pools = () => {
     try {
       setLoading(true);
       const contract = await getContract();
+      console.log(contract);
       const result = await contract.getValue();
+
       console.log("Contract stake: ",result);
       console.log(typeof result);
       const valueInEth = ethers.utils.formatEther(result.toString());
@@ -46,22 +42,65 @@ const Pools = () => {
 
       console.log("Value: ", value)
     } catch (err) {
-      // setError(err instanceof Error ? err.message : 'An error occurred');
       console.log('Error:', err)
     } finally {
       setLoading(false);
     }
   };
+
+  
   
 
   
   
 
   useEffect(() => {
-    // console.log("Updated value:", value);
-    
     fetchValue();
   }, []);
+
+  
+  const handleOnClickData = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    Data();
+  }
+
+  // const handleOnClickBet = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  //   e.preventDefault();
+    
+  // }
+
+  // const Betting = async () => {
+  //   try {
+  //     const contract = await betting();
+  //     const amountInWei = ethers.utils.parseEther(betAmount.toString());
+  //     const result = await contract.setValue(Number(betAmount), , amountInWei)
+      
+  //   } catch {
+
+  //   }
+  // }
+  
+  const Data = async () => {
+    try {
+      setLoading(true);
+      const contract = await getData();
+      console.log(contract);
+      const result = await contract.getValue();
+
+      console.log("Contract stake: ",result);
+      console.log(typeof result);
+      
+      console.log(result[0]);
+      
+      setAmount(result[0]);
+      setTime(result[1]);
+
+    } catch (err) {
+      console.log('Error:', err)
+    } finally {
+      setLoading(false);
+    }
+  };
 
   
 
@@ -78,10 +117,11 @@ const Pools = () => {
             <input
               type="number"
               name="amount"
-              value={betAmount ?? ""}
+              value={betAmount}
               placeholder="Enter your bet amount"
               onChange={handleAmountChange}
               className="outline-none text-black rounded-lg"
+              
             />
             <div className=" flex items-center justify-between">
               <button
@@ -96,8 +136,12 @@ const Pools = () => {
               <button className=" rounded shadow-lg bg-[#1f1b24]  mt-2 px-4 py-1 mx-16">
                 +
               </button>
+              <button className=" rounded shadow-lg bg-[#1f1b24]  mt-2 px-4 py-1 mx-16" onClick={handleOnClickData}>
+                Data
+              </button>
             </div>
             <div className="text-xl font-bold">
+              
               Your current balance: {
                 loading ? (
                   "Loading..."
@@ -105,6 +149,32 @@ const Pools = () => {
                   `${value} ETH`
                 ) : (
                   "Please connect your wallet"
+                )
+              }
+            </div>
+            <div className="text-xl font-bold">
+              Amount: {
+                loading ? (
+                  "Loading..."
+                ) :
+                amount ? (
+                  `${amount} ETH`
+                ) : (
+                  "Press Data button"
+                )
+              }
+              
+              
+            </div>
+            <div className="text-xl font-bold">
+              Time: {
+                loading ? (
+                  "Loading..."
+                ) :
+                time ? (
+                  `${time} unix`
+                ) : (
+                  "Press Data button"
                 )
               }
             </div>
