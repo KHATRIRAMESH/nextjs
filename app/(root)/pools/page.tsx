@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { ethers} from "ethers";
 import { getContract, getData, betting } from "@/utils/contract";
-import { Numans } from "next/font/google";
+import CandleChart from "@/components/Chart/CandleChart"
 
 
 
