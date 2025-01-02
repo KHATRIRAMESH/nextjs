@@ -76,7 +76,7 @@ const Pools = () => {
     // fetchValue();
 
     // alert("value sumbitted");
-    console.log(betDetail)
+    console.log("Bet Details:",betDetail);
   };
 
   //handle up
